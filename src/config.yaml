@@ -11,7 +11,7 @@ metadata:
   title:
     default: AislePal
     template: '%s — AislePal'
-  description: "AislePal is a web application for retailers to capture in-store intent and increase sales in real time."
+  description: 'AislePal is a web application for retailers to capture in-store intent and increase sales in real time.'
   robots:
     index: true
     follow: true
