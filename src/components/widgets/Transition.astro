@@ -7,32 +7,31 @@ interface Props extends Widget {
   size?: 'small' | 'large';
 }
 
-const {
-  text,
-  size = 'large',
-  id,
-  isDark = false,
-  classes = {},
-  bg = await Astro.slots.render('bg'),
-} = Astro.props;
+const { text, size = 'large', id, isDark = false, classes = {}, bg = await Astro.slots.render('bg') } = Astro.props;
 
 const textSlot = await Astro.slots.render('text');
 const textSizeClass = size === 'small' ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl';
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16 mt-32 mb-32 ${classes?.container ?? ''}`} bg={bg}>
+<WidgetWrapper
+  id={id}
+  isDark={isDark}
+  containerClass={`max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16 mt-32 mb-32 ${classes?.container ?? ''}`}
+  bg={bg}
+>
   <div class="max-w-4xl mx-auto text-center mb-8">
-    {text ? (
-      <p class={`${textSizeClass} text-muted dark:text-slate-400 leading-relaxed`} set:html={text} />
-    ) : textSlot ? (
-      <p class={`${textSizeClass} text-muted dark:text-slate-400 leading-relaxed`}>
-        <Fragment set:html={textSlot} />
-      </p>
-    ) : (
-      <p class={`${textSizeClass} text-muted dark:text-slate-400 leading-relaxed`}>
-        <slot />
-      </p>
-    )}
+    {
+      text ? (
+        <p class={`${textSizeClass} text-muted dark:text-slate-400 leading-relaxed`} set:html={text} />
+      ) : textSlot ? (
+        <p class={`${textSizeClass} text-muted dark:text-slate-400 leading-relaxed`}>
+          <Fragment set:html={textSlot} />
+        </p>
+      ) : (
+        <p class={`${textSizeClass} text-muted dark:text-slate-400 leading-relaxed`}>
+          <slot />
+        </p>
+      )
+    }
   </div>
 </WidgetWrapper>
-
