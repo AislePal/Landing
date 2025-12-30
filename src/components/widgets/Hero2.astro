@@ -1,0 +1,180 @@
+---
+import Image from '~/components/common/Image.astro';
+import Button from '~/components/ui/Button.astro';
+
+import type { Hero as Props } from '~/types';
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline,
+
+  content = await Astro.slots.render('content'),
+  actions = await Astro.slots.render('actions'),
+  image = await Astro.slots.render('image'),
+
+  id,
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<section class="relative md:-mt-[76px] not-prose" {...id ? { id } : {}}>
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <slot name="bg">
+      {bg ? <Fragment set:html={bg} /> : null}
+    </slot>
+  </div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
+    <div class="py-12 md:py-20 lg:py-0 lg:flex lg:items-center lg:min-h-screen lg:gap-8">
+      <div class="basis-1/2 text-center lg:text-left pb-10 md:pb-16 mx-auto">
+        {
+          tagline && (
+            <p
+              class="text-base text-primary font-bold tracking-wide uppercase intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
+              set:html={tagline}
+            />
+          )
+        }
+        {
+          title && (
+            <h1
+              class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
+              set:html={title}
+            />
+          )
+        }
+        <div class="max-w-3xl mx-auto lg:max-w-none">
+          {
+            subtitle && (
+              <p
+                class="text-xl text-muted mb-6 dark:text-slate-300 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
+                set:html={subtitle}
+              />
+            )
+          }
+
+          {
+            actions && (
+              <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 lg:justify-start lg:m-0 lg:max-w-7xl intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
+                {Array.isArray(actions) ? (
+                  actions.map((action) => (
+                    <div class="flex w-full sm:w-auto">
+                      <Button {...(action || {})} class="w-full sm:mb-0" />
+                    </div>
+                  ))
+                ) : (
+                  <Fragment set:html={actions} />
+                )}
+              </div>
+            )
+          }
+        </div>
+        {
+          content && (
+            <div class="intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
+              <Fragment set:html={content} />
+            </div>
+          )
+        }
+      </div>
+      <div class="basis-1/2 flex items-center">
+        {
+          image && (
+            <div class="relative m-auto max-w-4xl w-full intersect-once intersect-no-queue motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter">
+              {typeof image === 'string' ? (
+                <Fragment set:html={image} />
+              ) : (
+                <div class="hero-image-container">
+                  <Image
+                    class="mx-auto rounded-md hero-floating-image"
+                    id="hero-floating-image"
+                    widths={[400, 768, 1024]}
+                    sizes="(max-width: 768px) 100vw, 432px"
+                    layout="contained"
+                    loading="eager"
+                    {...image}
+                  />
+                </div>
+              )}
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Cursor-based rotation and floating animation for hero image
+  (function () {
+    const heroImage = document.getElementById('hero-floating-image') as HTMLElement | null;
+    if (!heroImage) return;
+
+    // TypeScript: we've already checked for null, so we can safely use non-null assertion
+    const image = heroImage;
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let floatY = 0;
+    let floatTime = 0;
+
+    const rotationIntensity = 8; // Maximum rotation in degrees
+    const maxRotation = 10; // Absolute maximum rotation cap in degrees
+    const smoothness = 0.1; // Smoothing factor (0-1)
+    const floatAmplitude = 20; // Floating distance in pixels
+    const floatSpeed = 0.002; // Floating animation speed
+
+    function handleMouseMove(e: MouseEvent) {
+      const rect = image.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      // Calculate mouse position relative to image center
+      const rawX = ((e.clientX - centerX) / rect.width) * rotationIntensity;
+      const rawY = ((e.clientY - centerY) / rect.height) * rotationIntensity;
+
+      // Cap the rotation values to prevent excessive tilting
+      mouseX = Math.max(-maxRotation, Math.min(maxRotation, rawX));
+      mouseY = Math.max(-maxRotation, Math.min(maxRotation, rawY));
+    }
+
+    function animate() {
+      // Smooth interpolation for cursor rotation
+      currentX += (mouseX - currentX) * smoothness;
+      currentY += (mouseY - currentY) * smoothness;
+
+      // Floating animation (sine wave)
+      floatTime += floatSpeed;
+      floatY = Math.sin(floatTime * Math.PI * 2) * floatAmplitude;
+
+      // Apply combined transform: floating + cursor rotation
+      image.style.transform = `
+        translateY(${floatY}px)
+        rotateX(${-currentY}deg)
+        rotateY(${currentX}deg)
+      `;
+
+      requestAnimationFrame(animate);
+    }
+
+    // Only enable on desktop (larger screens)
+    const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+    if (isDesktop) {
+      document.addEventListener('mousemove', handleMouseMove);
+    }
+
+    // Start animation loop
+    animate();
+
+    // Reset rotation on mouse leave (but keep floating)
+    if (isDesktop) {
+      document.addEventListener('mouseleave', () => {
+        mouseX = 0;
+        mouseY = 0;
+      });
+    }
+  })();
+</script>

@@ -1,0 +1,429 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+// import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Content from '~/components/widgets/Content.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+// import Announcement from '~/components/widgets/Announcement.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Industries from '~/components/widgets/Industries.astro';
+import Transition from '~/components/widgets/Transition.astro';
+
+const metadata = {
+  title: 'AislePal — Capture in-store intent. Increase sales in real time.',
+  ignoreTitleTemplate: true,
+};
+---
+
+<!-- <Announcement /> -->
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+  <Hero2
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book a Demo',
+        href: '#contact',
+      },
+      {
+        variant: 'secondary',
+        text: 'Join a Pilot',
+        href: '#contact',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/demo_phone_mockup.png',
+      alt: 'AislePal Hero Image',
+    }}
+  >
+    <Fragment slot="title">
+      Capture in-store <span class="text-gradient">intent</span><br />Increase sales in <span class="text-gradient"
+        >real time</span
+      >.
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      AislePal turns in-store searches, scans, and interactions into <span class="text-gradient">live intelligence</span
+      > retailers use to drive conversion, promotions, and store decisions.
+    </Fragment>
+
+    <Fragment slot="content">
+      <p class="text-sm text-muted dark:text-slate-400 mt-6">No app · No hardware · Live in days · POS/ERP ready</p>
+    </Fragment>
+  </Hero2>
+
+  <!-- WHY NOW Section ******************* -->
+
+  <Content
+    id="intro"
+    tagline="WHY NOW?"
+    title="<span class='text-gradient'>Online-trained</span> shoppers. <span class='text-gradient'>Offline-blind</span> stores."
+    subtitle="Online retail delivers a convenient, personalized and fast shopping experience. In-store, that intelligence disappears — slowing shoppers, overwhelming decisions, and ending trips early."
+  />
+
+  <!-- THE PROBLEM Section ******************* -->
+  <Content
+    tagline="THE PROBLEM"
+    title="Retailers see what was bought, not what was <span class='text-gradient'>wanted</span>."
+    subtitle="Without intent visibility, stores can't optimize conversion, layout, promotions, inventory, or labor — costing hundreds of billions in lost in-store sales."
+  />
+
+  <!-- WHY HARDWARE FAILED Section ******************* -->
+  <Content
+    tagline="WHY HARDWARE FAILED"
+    title="Cameras see actions,<br/>not <span class='text-gradient'>intent</span>."
+    subtitle="Without intent visibility, stores can't optimize conversion, layout, promotions, inventory, or labor — costing hundreds of billions in lost in-store sales."
+  />
+
+  <!-- Intro Transition Section ******************* -->
+  <Transition>
+    <Fragment slot="text">
+      Retail doesn't need more hardware or another omnichannel. It's missing a <span class="text-gradient"
+        >low-friction intelligence layer</span
+      > inside the store.
+    </Fragment>
+  </Transition>
+
+  <!-- Meet AislePal Section ******************* -->
+  <Content
+    id="solution"
+    tagline="THE SOLUTION"
+    title="Meet <span class='text-gradient'>AislePal</span>"
+    subtitle="AislePal is a <span class='text-gradient'>live</span>, in-store catalog and decision engine delivered as a lightweight web app."
+    items={[
+      {
+        title: 'Discover products',
+        description: 'Browse a live catalog with real-time inventory, rankings, and promotions.',
+        icon: 'tabler:wand',
+      },
+      {
+        title: 'Navigate the store',
+        description: 'Get instant aisle-level guidance to find exactly what you need.',
+      },
+      {
+        title: 'Access relevant promotions',
+        description: 'See personalized deals and offers as you shop.',
+      },
+      {
+        title: 'Scan & pay',
+        description: 'Faster trips, fewer lines with optional in-aisle checkout.',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/consumer_merchant_and_backend_mockup_showcase.png',
+      alt: 'AislePal consumer and merchant interface',
+    }}
+  >
+    <Fragment slot="content">
+      <p class="text-lg text-muted dark:text-slate-400">It gives shoppers one simple entry point to:</p>
+    </Fragment>
+    <Fragment slot="content-after-items">
+      <p class="text-lg text-muted dark:text-slate-400 mb-6 mt-8">
+        Behind the scenes, it converts behavior into real-time intelligence retailers can finally act on.
+      </p>
+      <p class="text-lg font-semibold dark:text-white">
+        This is <span class="text-gradient">hybrid shopping</span> — upgrading the physical store with the feedback loops
+        that made online retail powerful.
+      </p>
+    </Fragment>
+  </Content>
+
+  <!-- HOW IT WORKS Section ******************* -->
+  <Steps
+    id="how-it-works"
+    tagline="HOW IT WORKS"
+    title="<span class='text-gradient'>One</span> entry point. One continuous <span class='text-gradient'>data loop</span>"
+    subtitle="Every step generates high-quality <span class='text-gradient'>intent data</span>."
+    items={[
+      {
+        title: 'Scan a QR at the entrance or shelf',
+        description: 'Quick entry point — no app download required. Just scan and start shopping.',
+        icon: 'tabler:qrcode',
+      },
+      {
+        title: 'Search naturally ("protein bars under $5")',
+        description: 'Use natural language queries just like online shopping. Find products instantly.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Browse a live catalog (in-stock, ranked, promoted)',
+        description: 'See real-time inventory, product rankings, and active promotions all in one place.',
+        icon: 'tabler:list',
+      },
+      {
+        title: 'Navigate instantly with aisle-level guidance',
+        description: 'Get precise directions to products with step-by-step navigation.',
+        icon: 'tabler:map-pin',
+      },
+      {
+        title: 'Scan & pay (optional) — faster trips, fewer lines',
+        description: 'Complete your purchase as you shop. Skip the checkout line entirely.',
+        icon: 'tabler:shopping-cart',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/aisle_navigation_on_phone.png',
+      alt: 'Aisle navigation on phone',
+    }}
+  />
+
+  <!-- Aisle Analytics Section ******************* -->
+  <Content
+    id="analytics"
+    isReversed
+    tagline="Aisle Analytics"
+    title="From behavior to decisions — <span class='text-gradient'>instantly</span>"
+    subtitle="Aisle Analytics connects the entire in-store customer journey, capturing every interaction from search to purchase, helping you <span class='text-gradient'>sell more</span>, <span class='text-gradient'>stock smarter</span>, and <span class='text-gradient'>personalize better</span>."
+    items={[
+      {
+        title: 'What shoppers want',
+        description:
+          'Understand customer intent and preferences in real-time through search patterns and engagement data.',
+      },
+      {
+        title: 'Where they struggle',
+        description: 'Identify friction points and navigation challenges that prevent customers from finding products.',
+      },
+      {
+        title: 'Where sales are being lost',
+        description: 'Pinpoint missed opportunities and abandoned searches to recover lost revenue.',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/analytics/low_performing_insights.png',
+      alt: 'Aisle Analytics dashboard',
+    }}
+  >
+    <Fragment slot="content-after-items">
+      <p class="text-lg text-muted dark:text-slate-400 mb-6 mt-6">
+        Retailers can optimize inventory, layout, promotions, staffing, and conversion — in real time.
+      </p>
+      <p class="text-lg font-semibold dark:text-white">
+        This becomes the <span class="text-gradient">OS and intelligence decision layer</span> for your store.
+      </p>
+    </Fragment>
+  </Content>
+
+  <!-- Setup & Integration Section ******************* -->
+
+  <Steps
+    id="setup"
+    tagline="Setup & Integration"
+    title="Get up and running <span class='text-gradient'>quickly</span>"
+    subtitle=" <span class='text-gradient'>Seamless integration</span> into your existing ERP systems. CCPA/GDPR aligned. <span class='text-gradient'>No persistent IDs</span>. <span class='text-gradient'>Privacy-first design</span> that complies with data protection regulations."
+    items={[
+      {
+        title: 'Upload store layout',
+        description: 'Import your store floor plan and configure aisle layouts for accurate navigation.',
+        icon: 'tabler:square-number-1',
+      },
+      {
+        title: 'Integrate with POS, ERP, or loyalty programs',
+        description:
+          'Connect with existing systems like SAP, Oracle, or Microsoft Dynamics 365 for unified operations.',
+        icon: 'tabler:square-number-2',
+      },
+      {
+        title: 'Customize and final setup',
+        description: 'Match your brand aesthetics, put up the in-store QR-codes, and provide staff training.',
+        icon: 'tabler:square-number-3',
+      },
+      {
+        title: 'Ready!',
+        description: '',
+        icon: 'tabler:check',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/ERP_integrations.png',
+      alt: 'ERP integrations',
+    }}
+  >
+    <Fragment slot="content">
+      <div class="mt-6 p-4 bg-blue-50 dark:bg-slate-800 rounded-lg">
+        <p class="text-lg font-semibold dark:text-white mb-2">Go Live & Monitor</p>
+        <p class="text-lg text-muted dark:text-slate-400">
+          Launch the system in <strong class="text-gradient">10-14 days</strong>. Monitor sales, engagement, security
+          alerts, and customer analytics in real-time.
+        </p>
+      </div>
+    </Fragment>
+  </Steps>
+
+  <!-- Loss Prevention Section ******************* -->
+
+  <Features
+    id="loss-prevention"
+    isReversed
+    title="Loss Prevention"
+    subtitle="Behavioral shrink reduction through <span class='text-gradient'>real-time visibility</span> and <span class='text-gradient'>anomaly detection</span> — without cameras or added friction."
+    items={[
+      {
+        title: 'Real-time cart visibility',
+        description:
+          'Builds a live digital cart as shoppers scan, helping prevent missed items and making the checkout flow clearer for both shoppers and staff.',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Anomaly detection',
+        description:
+          'Flags unusual behavior patterns across searches, scans, and exits so teams can address risk without confrontation or surveillance.',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Peak-hour risk coverage',
+        description:
+          'Identifies high-risk time windows and congested zones, helping managers deploy staff where visibility matters most.',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Frictionless safety by design',
+        description:
+          'Improves in-store safety by reducing confusion and process gaps — preserving a positive shopper experience while lowering controllable shrink.',
+        icon: 'tabler:check',
+      },
+    ]}
+  >
+    <Fragment slot="content">
+      <p class="text-lg text-muted dark:text-slate-400 mb-6">
+        Reduces accidental non-scans and opportunistic loss through real-time cart visibility and behavioral anomaly
+        signals — without cameras or added friction.
+      </p>
+    </Fragment>
+  </Features>
+
+  <!-- ROI Section - What Retailers Get ******************* -->
+
+  <Features2
+    id="roi"
+    tagline="ROI's & Value Gain"
+    title="How AislePal <span class='text-gradient'>pays for itself</span>"
+    subtitle="AislePal turns every store visit into <span class='text-gradient'>measurable revenue</span> and marketing opportunities."
+    items={[
+      {
+        title: 'Recovered demand',
+        description:
+          '• Capture "not found" searches <br/>• Redirect shoppers in real time <br/>• Convert lost intent into sales',
+        icon: 'flat-color-icons:document',
+      },
+      {
+        title: 'New revenue',
+        description:
+          '• Contextual promotions based on behavior <br/>• Time-based offers during off-peak hours <br/>• New in-store retail media surfaces',
+        icon: 'flat-color-icons:template',
+      },
+      {
+        title: 'Operational efficiency',
+        description: '• Fewer repetitive questions <br/>• Reduced staff cognitive load <br/>• Better labor allocation',
+        icon: 'flat-color-icons:voice-presentation',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Results Section ******************* -->
+  <Stats
+    id="results"
+    tagline="Results"
+    title="The <span class='text-gradient'>impact</span> of AislePal"
+    stats={[
+      { title: 'Expected NPS lift', amount: '15 pt.' },
+      { title: 'FTE efficiency gain', amount: '10%' },
+      { title: 'ROI Multiple', amount: '3.2x' },
+      { title: 'Gross Profit Impact', amount: '$70,560' },
+    ]}
+  />
+
+  <!-- Industries Section ******************* -->
+  <Industries
+    id="industries"
+    tagline="Industries"
+    title="Who we're <span class='text-gradient'>built for</span>"
+    subtitle=""
+    industries={[
+      { name: 'Grocery', image: '~/assets/images/industries/supermarket-aisle.jpg' },
+      { name: 'Big Box', image: '~/assets/images/industries/big-box.png' },
+      { name: 'Department', image: '~/assets/images/industries/department.png' },
+      { name: 'Pharmacy', image: '~/assets/images/industries/pharmacy.png' },
+      { name: 'Specialty', image: '~/assets/images/industries/speciality.png' },
+    ]}
+  />
+
+  <!-- Highlighted Blog Posts Widget ******* -->
+
+  <BlogLatestPosts title="Find out more content in our Blog" />
+
+  <!-- FAQs Widget ******************* -->
+
+  <FAQs
+    id="faq"
+    tagline="FAQ"
+    title="Frequently Asked Questions"
+    subtitle=""
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: 'Question?',
+        description: 'Answer to the question.',
+      },
+      {
+        title: 'Question?',
+        description: 'Answer to the question.',
+      },
+      {
+        title: 'Question?',
+        description: 'Answer to the question.',
+      },
+      {
+        title: 'Question?',
+        description: 'Answer to the question.',
+      },
+      {
+        title: 'Question?',
+        description: 'Answer to the question.',
+      },
+      {
+        title: 'Question?',
+        description: 'Answer to the question.',
+      },
+    ]}
+  />
+
+  <!-- Final CTA Section *********** -->
+  <Transition size="large">
+    <Fragment slot="text">
+      Without a platform like AislePal, physical retailers will continue losing relevance to online-native experiences.
+      With it, they gain the <span class="text-gradient">intelligence needed to compete</span> — not by copying e-commerce,
+      but by <span class="text-gradient">upgrading the store itself</span>.
+    </Fragment>
+  </Transition>
+
+  <!-- CallToAction Widget *********** -->
+  <CallToAction
+    id="contact"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book an Appointment',
+        href: '#contact',
+        icon: 'tabler:calendar',
+      },
+    ]}
+  >
+    <Fragment slot="title"> Let's bring the <span class="text-gradient">advantage</span> back to your store. </Fragment>
+    <Fragment slot="subtitle">
+      <span class="text-gradient">Own</span> the data. <span class="text-gradient">Own</span> the experience. <span
+        class="text-gradient">Own</span
+      > the future.
+    </Fragment>
+  </CallToAction>
+</Layout>

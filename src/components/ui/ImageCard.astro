@@ -1,0 +1,42 @@
+---
+import { findImage } from '~/utils/images';
+import { getImage } from 'astro:assets';
+
+interface Props {
+  img: string;
+  title: string;
+}
+
+const { img, title } = Astro.props;
+
+// Resolve the image path
+let imageUrl = img;
+if (img.startsWith('~/')) {
+  const resolvedImage = await findImage(img);
+  if (resolvedImage && typeof resolvedImage !== 'string') {
+    // If it's an ImageMetadata object, get the optimized URL
+    const optimizedImage = await getImage({ src: resolvedImage });
+    imageUrl = optimizedImage.src;
+  } else if (typeof resolvedImage === 'string') {
+    imageUrl = resolvedImage;
+  } else {
+    // Fallback: use relative path
+    imageUrl = img.replace('~/assets/', '/src/assets/');
+  }
+} else if (img.startsWith('./assets/')) {
+  // Handle relative paths
+  imageUrl = img.replace('./assets/', '/src/assets/');
+}
+---
+
+<div class="min-w-[300px] h-[420px] rounded-3xl relative snap-start flex-shrink-0 overflow-hidden group">
+  <div
+    class="absolute inset-0 bg-cover bg-center transition-transform duration-300 ease-out group-hover:scale-105"
+    style={`background-image: url('${imageUrl}')`}
+  >
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-black/70 to-transparent z-10"></div>
+  <div class="absolute top-5 left-5 text-2xl text-white font-semibold z-20">
+    {title}
+  </div>
+</div>
