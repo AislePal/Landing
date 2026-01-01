@@ -18,7 +18,7 @@ metadata:
   openGraph:
     site_name: AislePal
     images:
-      - url: '~/assets/images/logos/logo_black_white_bg.png'
+      - url: '~/assets/images/logos/logo_no_bg.png'
         width: 1200
         height: 628
     type: website
